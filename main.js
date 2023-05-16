@@ -18,6 +18,14 @@ buttons.forEach(b => {
     })
 })
 
+function eventBus(input) {
+    !isNaN(input) ? updateInput(input) : operatorBus(input)
+}
+
+function operatorBus(input) {
+    ['+', '-', 'x', '÷'].includes(input) ? (tempMemory = input, evaluateOperator(operatorMemory)) : otherFunctions[input]()
+}
+
 function updateInput(input) {
     screenValue += input
     bottomScreen.textContent = screenValue
@@ -34,12 +42,17 @@ function updateScreenOperator() {
     screenValue = ""
 }
 
-function eventBus(input) {
-    !isNaN(input) ? updateInput(input) : operatorBus(input)
+function displayEvaluation(input) {
+    totalValue = "0"
+    operatorMemory = "+"
+    screenValue = input
+    bottomScreen.textContent = screenValue
+    topScreen.textContent = ""
 }
 
-function operatorBus(input) {
-    ['+', '-', 'x', '÷'].includes(input) ? (tempMemory = input, operatorFunctions[operatorMemory]()) : otherFunctions[input]()
+function evaluateOperator(operator) {
+    updateTotal(operations[operator](totalValue, screenValue))
+    updateScreenOperator()
 }
 
 const otherFunctions = {
@@ -49,33 +62,6 @@ const otherFunctions = {
     '▶': () => (screenValue = screenValue.slice(-0, -1), bottomScreen.textContent = screenValue),
     '.': () => bottomScreen.textContent.includes('.') ? false : updateInput('.'),
     '√': () => bottomScreen.textContent.includes('√') ? false : (updateInput('√'), operatorMemory = '√'),
-}
-
-function displayEvaluation(input) {
-    totalValue = "0"
-    operatorMemory = "+"
-    screenValue = input
-    bottomScreen.textContent = screenValue
-    topScreen.textContent = ""
-}
-
-const operatorFunctions = {
-    '+': () => {
-        updateTotal(operations['+'](totalValue, screenValue))
-        updateScreenOperator()
-    },
-    '-': () => {
-        updateTotal(operations['-'](totalValue, screenValue))
-        updateScreenOperator()
-    },
-    'x': () => {
-        updateTotal(operations['x'](totalValue, screenValue))
-        updateScreenOperator()
-    },
-    '÷': () => {
-        updateTotal(operations['÷'](totalValue, screenValue))
-        updateScreenOperator()
-    }
 }
 
 const operations = {
