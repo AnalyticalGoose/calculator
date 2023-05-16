@@ -17,8 +17,9 @@ button {
     font-size: 4vh;
     font-weight: bold;
     border-radius: 0.2rem;
-    background-color: rgb(160, 160, 160);
-    color: rgba(0, 0, 0, 0.781);
+    border-color: rgba(5, 5, 94, 0.322);
+    background-color: rgb(78, 52, 78);
+    color: rgba(216, 216, 216, 0.911);
 }
 
 .screen-container {
@@ -33,7 +34,7 @@ button {
 
 .top-screen, .bottom-screen {
     display: flex;
-    color: rgba(255, 255, 255, 0.911);
+    color: rgba(216, 216, 216, 0.911);
     font-size: 5vh;
     min-height: 7vh;
 }
